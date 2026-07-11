@@ -1,20 +1,20 @@
 #!/bin/sh
-# Standalone curl-able installer: builds the keypop CLI from a pinned commit
-# and installs the binary to ~/.local/bin. CLI only — does not bundle the app,
-# install the LaunchAgent, or touch TCC permissions (use scripts/install.sh
-# from a full checkout for the complete setup).
+# Standalone curl-able installer: builds the keypop CLI from source and
+# installs the binary to ~/.local/bin. CLI only — does not bundle the app,
+# install the LaunchAgent, or touch TCC permissions. For the complete setup
+# (system-wide expander, app bundle), clone the repo and run scripts/install.sh.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/KthKuang/keypop/main/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/Workplace-Labs/keypop/main/install.sh | sh
 #
 # Overrides:
-#   KEYPOP_REPO    git URL to fetch from (default: this fork)
-#   KEYPOP_REF     commit/tag to build   (default: audited pin below)
-#   KEYPOP_PREFIX  install directory     (default: ~/.local/bin)
+#   KEYPOP_REPO    git URL to build from (default: official repo)
+#   KEYPOP_REF     branch, tag, or commit to build (default: main)
+#   KEYPOP_PREFIX  install directory (default: ~/.local/bin)
 set -eu
 
-REPO="${KEYPOP_REPO:-https://github.com/KthKuang/keypop.git}"
-REF="${KEYPOP_REF:-c81e1bcc9f474f32acda10e9f85a35c3246a01fc}"
+REPO="${KEYPOP_REPO:-https://github.com/Workplace-Labs/keypop.git}"
+REF="${KEYPOP_REF:-main}"
 PREFIX="${KEYPOP_PREFIX:-$HOME/.local/bin}"
 
 if [ "$(uname -s)" != "Darwin" ]; then
